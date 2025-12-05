@@ -1,0 +1,37 @@
+{
+  "name": "apitinker",
+  "version": "1.0.0",
+  "description": "A Chrome extension for API Mocking, Testing, Debugging & Contract Management",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:e2e": "cypress open",
+    "test:unit": "vitest run",
+    "package": "npm run build && cd dist && zip -r ../apitinker.zip ."
+  },
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "idb": "^8.0.0",
+    "pinia": "^2.1.7",
+    "swagger-parser": "^10.0.3",
+    "vue": "^3.4.0",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.254",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "@vue/test-utils": "^2.4.3",
+    "autoprefixer": "^10.4.16",
+    "cypress": "^13.6.2",
+    "jsdom": "^27.0.1",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "vite": "^5.0.0",
+    "vite-plugin-node-polyfills": "^0.24.0",
+    "vitest": "^1.1.0"
+  }
+}

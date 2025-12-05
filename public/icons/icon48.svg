@@ -1,0 +1,7 @@
+<!-- Placeholder SVG icon 48x48 -->
+<svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+  <rect width="48" height="48" fill="#3b82f6" rx="8"/>
+  <circle cx="24" cy="18" r="6" fill="white"/>
+  <path d="M 12 30 L 24 36 L 36 30 L 36 38 L 24 44 L 12 38 Z" fill="white"/>
+  <text x="24" y="15" font-family="Arial" font-size="8" fill="#3b82f6" text-anchor="middle" font-weight="bold">API</text>
+</svg>

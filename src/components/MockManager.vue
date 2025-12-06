@@ -1,14 +1,14 @@
 <template>
   <div class="mock-manager">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-4">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Mock Rules</h2>
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-2 xs:p-4 mb-2 xs:mb-4">
+      <div class="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 xs:gap-0 mb-2 xs:mb-4">
+        <h2 class="text-base xs:text-lg font-semibold text-gray-900 dark:text-white">Mock Rules</h2>
         
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2 w-full xs:w-auto">
           <select 
             v-model="activeEnvironment"
             @change="setEnvironment(activeEnvironment)"
-            class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+            class="flex-1 xs:flex-none px-2 xs:px-3 py-1.5 xs:py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-xs xs:text-sm"
           >
             <option v-for="env in environments" :key="env" :value="env">
               {{ env }}
@@ -17,21 +17,21 @@
           
           <button 
             @click="showAddRule = true"
-            class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
+            class="px-2 xs:px-4 py-1.5 xs:py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-xs xs:text-sm"
           >
-            + Add Rule
+            + Add
           </button>
           
           <button 
             @click="showExport = true"
-            class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-sm"
+            class="px-2 xs:px-4 py-1.5 xs:py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-xs xs:text-sm"
           >
             Export
           </button>
           
           <button 
             @click="showImport = true"
-            class="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors text-sm"
+            class="px-2 xs:px-4 py-1.5 xs:py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors text-xs xs:text-sm"
           >
             Import
           </button>
@@ -41,53 +41,53 @@
       <!-- Rules List -->
       <div class="space-y-2 max-h-96 overflow-y-auto">
         <div 
-          v-for="rule in getActiveRules()" 
+          v-for="rule in getActiveRules().filter(rule => rule && rule.id)" 
           :key="rule.id"
-          class="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg"
+          class="p-2 xs:p-4 bg-gray-50 dark:bg-gray-900 rounded-lg"
         >
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2">
+          <div class="flex flex-col xs:flex-row items-start justify-between gap-2">
+            <div class="flex-1 w-full xs:w-auto">
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
                 <input 
                   type="checkbox" 
                   :checked="rule.enabled"
                   @change="toggleRule(rule.id)"
-                  class="w-5 h-5 rounded"
+                  class="w-4 h-4 xs:w-5 xs:h-5 rounded shrink-0"
                 />
-                <span class="text-sm font-medium text-gray-900 dark:text-white">{{ rule.name || 'Unnamed Rule' }}</span>
-                <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded">
-                  {{ rule.action }}
+                <span class="text-xs xs:text-sm font-medium text-gray-900 dark:text-white break-all">{{ rule.name || 'Unnamed Rule' }}</span>
+                <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded shrink-0">
+                  {{ rule.action || 'Unknown' }}
                 </span>
               </div>
               
-              <div class="ml-7 space-y-1 text-sm text-gray-600 dark:text-gray-400">
-                <div><span class="font-medium">URL Pattern:</span> {{ rule.urlPattern }}</div>
+              <div class="ml-0 xs:ml-7 space-y-1 text-xs xs:text-sm text-gray-600 dark:text-gray-400">
+                <div class="break-all"><span class="font-medium">URL:</span> {{ rule.urlPattern }}</div>
                 <div v-if="rule.method"><span class="font-medium">Method:</span> {{ rule.method }}</div>
                 <div v-if="rule.delay"><span class="font-medium">Delay:</span> {{ rule.delay }}ms</div>
               </div>
             </div>
             
-            <div class="flex gap-2">
+            <div class="flex gap-2 w-full xs:w-auto">
               <button 
                 @click="editRule(rule)"
-                class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900 rounded"
+                class="flex-1 xs:flex-none px-3 py-1.5 xs:p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900 rounded text-sm xs:text-base"
                 title="Edit"
               >
-                ✎
+                Edit
               </button>
               
               <button 
                 @click="deleteRule(rule.id)"
-                class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900 rounded"
+                class="flex-1 xs:flex-none px-3 py-1.5 xs:p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900 rounded text-sm xs:text-base"
                 title="Delete"
               >
-                ×
+                Delete
               </button>
             </div>
           </div>
         </div>
         
-        <div v-if="getActiveRules().length === 0" class="text-center text-gray-500 py-8">
+        <div v-if="getActiveRules().length === 0" class="text-center text-gray-500 py-8 text-sm">
           No rules for {{ activeEnvironment }} environment
         </div>
       </div>
@@ -96,11 +96,11 @@
     <!-- Add/Edit Rule Modal -->
     <div 
       v-if="showAddRule || editingRule" 
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 xs:p-4"
       @click.self="closeModal"
     >
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-3 xs:p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <h3 class="text-base xs:text-xl font-semibold text-gray-900 dark:text-white mb-3 xs:mb-4">
           {{ editingRule ? 'Edit Rule' : 'Add Rule' }}
         </h3>
         

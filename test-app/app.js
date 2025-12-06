@@ -156,7 +156,7 @@ async function testSlowRequest() {
 function testConsoleLog() {
     const message = 'This is a console.log() message';
     console.log(message);
-    console.log('Object example:', { name: 'ApiTinker', version: '1.0.0', features: ['API Client', 'Mocking', 'Contracts'] });
+    console.log('Object example:', { name: 'ApiTinker', version: '1.0.0', features: ['API Client', 'Mocking', 'Bug Reports'] });
     console.log('Array example:', [1, 2, 3, 4, 5]);
     
     stats.consoleCount += 3;

@@ -13,11 +13,11 @@ describe('ApiTinker Extension', () => {
     cy.contains('Mocks').click()
     cy.contains('Mock Rules').should('be.visible')
     
-    cy.contains('Contracts').click()
-    cy.contains('API Contracts').should('be.visible')
-    
     cy.contains('Bugs').click()
     cy.contains('Bug Reports').should('be.visible')
+    
+    cy.contains('Settings').click()
+    cy.contains('Settings').should('be.visible')
   })
 
   it('should send an API request', () => {
@@ -38,16 +38,6 @@ describe('ApiTinker Extension', () => {
     cy.contains('Add Rule').click()
     
     cy.contains('Test Mock Rule').should('be.visible')
-  })
-
-  it('should create a contract', () => {
-    cy.contains('Contracts').click()
-    cy.contains('+ New Contract').click()
-    
-    cy.get('input[placeholder="My API Contract"]').type('Test Contract')
-    cy.contains('Create').click()
-    
-    cy.contains('Test Contract').should('be.visible')
   })
 
   it('should create a bug report', () => {

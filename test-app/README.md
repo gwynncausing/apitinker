@@ -67,12 +67,6 @@ This test application includes:
    - Modify headers or redirect to a different URL
    - Click API request buttons again to see mocked responses
 
-   **Contracts:**
-   - Go to the Contracts tab in ApiTinker
-   - Create a new OpenAPI or JSON Schema contract
-   - Define the expected API structure
-   - Validate your API requests against the contract
-
    **Bug Reporter:**
    - Click the console logging buttons in the test app
    - Click the error generation buttons
@@ -149,9 +143,8 @@ If mock rules don't apply:
 After testing with this simple app, try:
 1. Testing on real production websites
 2. Creating complex mock scenarios
-3. Building API contracts for your own APIs
-4. Sharing configurations with your team
-5. Generating bug reports for actual issues
+3. Sharing configurations with your team
+4. Generating bug reports for actual issues
 
 ## License
 

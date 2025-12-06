@@ -1,7 +1,7 @@
 {
   "name": "apitinker",
   "version": "1.0.0",
-  "description": "A Chrome extension for API Mocking, Testing, Debugging & Contract Management",
+  "description": "A Chrome extension for API Mocking, Testing, and Debugging",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,11 +13,8 @@
     "package": "npm run build && cd dist && zip -r ../apitinker.zip ."
   },
   "dependencies": {
-    "ajv": "^8.12.0",
-    "ajv-formats": "^2.1.1",
     "idb": "^8.0.0",
     "pinia": "^2.1.7",
-    "swagger-parser": "^10.0.3",
     "vue": "^3.4.0",
     "vue-router": "^4.2.5"
   },

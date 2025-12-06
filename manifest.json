@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ApiTinker",
   "version": "1.0.0",
-  "description": "API Mocking, Testing, Debugging & Contract Management Tool",
+  "description": "API Mocking, Testing, and Debugging Tool",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",

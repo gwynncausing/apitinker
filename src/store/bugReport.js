@@ -83,6 +83,13 @@ export const useBugReportStore = defineStore('bugReport', () => {
   
   function setCurrentReport(id) {
     currentReport.value = reports.value.find(r => r.id === id) || null
+    saveCurrentReport()
+  }
+  
+  async function saveCurrentReport() {
+    await chrome.storage.local.set({ 
+      currentReportId: currentReport.value?.id || null 
+    })
   }
   
   function exportAsJson(report) {
@@ -129,13 +136,17 @@ export const useBugReportStore = defineStore('bugReport', () => {
   }
   
   async function loadData() {
-    const data = await chrome.storage.local.get(['bugReports'])
+    const data = await chrome.storage.local.get(['bugReports', 'currentReportId'])
     
     // Ensure reports is always an array
     if (data.bugReports && Array.isArray(data.bugReports)) {
       reports.value = data.bugReports
     } else {
       reports.value = []
+    }
+    
+    if (data.currentReportId) {
+      currentReport.value = reports.value.find(r => r.id === data.currentReportId) || null
     }
   }
   

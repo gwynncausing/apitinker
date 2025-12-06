@@ -1,6 +1,6 @@
 # ApiTinker
 
-A Chrome extension for API Mocking, Testing, Debugging & Contract Management.
+A Chrome extension for API Mocking, Testing, and Debugging.
 
 ## 🎉 NEW: Response Modification Feature!
 
@@ -13,7 +13,6 @@ ApiTinker now supports **real-time API response modification**! Test features, s
 - **API Client**: Send API requests with full control over headers, body, and methods
 - **🆕 Modify Responses**: Intercept and modify API responses in real-time with 4 modification types
 - **Mock & Override APIs**: Create rules to mock API responses, modify headers, and simulate delays
-- **API Contracts**: Create, edit, and validate OpenAPI 3 and JSON Schema contracts
 - **Bug Report Recorder**: Capture console logs, errors, and API calls for debugging
 - **Collaboration**: Export/import configurations and share with your team
 
@@ -90,15 +89,6 @@ npm run test:e2e
 4. Toggle rules on/off as needed
 5. Export/import rules for sharing
 
-### API Contracts
-
-1. Navigate to the "Contracts" tab
-2. Click "+ New Contract" to create a contract
-3. Choose OpenAPI 3 or JSON Schema
-4. Edit the contract in the editor
-5. Click "Validate" to check for errors
-6. Export contracts for documentation
-
 ### Bug Reports
 
 1. Navigate to the "Bugs" tab
@@ -115,9 +105,7 @@ npm run test:e2e
 - Pinia (state management)
 - TailwindCSS (styling)
 - Chrome Extension Manifest V3
-- IndexedDB (local storage)
-- Swagger Parser (OpenAPI validation)
-- AJV (JSON Schema validation)
+- Chrome Storage API (local storage)
 
 ## Project Structure
 

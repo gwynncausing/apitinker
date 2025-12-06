@@ -1,40 +1,40 @@
 <template>
   <div class="bug-reporter">
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-4">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Bug Reports</h2>
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-2 xs:p-4 mb-2 xs:mb-4">
+      <div class="flex items-center justify-between mb-2 xs:mb-4">
+        <h2 class="text-base xs:text-lg font-semibold text-gray-900 dark:text-white">Bug Reports</h2>
         
         <button 
           @click="showCreateReport = true"
-          class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
+          class="px-2 xs:px-4 py-1.5 xs:py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-xs xs:text-sm whitespace-nowrap"
         >
-          + New Report
+          + New
         </button>
       </div>
       
       <!-- Reports List -->
       <div class="space-y-2 max-h-96 overflow-y-auto">
         <div 
-          v-for="report in reports" 
+          v-for="report in reports.filter(r => r && r.id)" 
           :key="report.id"
-          class="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
+          class="p-2 xs:p-4 bg-gray-50 dark:bg-gray-900 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
           @click="viewReport(report)"
         >
-          <div class="flex items-start justify-between">
-            <div class="flex-1">
-              <h3 class="font-medium text-gray-900 dark:text-white mb-1">{{ report.title }}</h3>
-              <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">{{ report.description }}</p>
-              <div class="flex items-center gap-4 text-xs text-gray-500">
+          <div class="flex flex-col xs:flex-row items-start justify-between gap-2">
+            <div class="flex-1 w-full xs:w-auto min-w-0">
+              <h3 class="font-medium text-sm xs:text-base text-gray-900 dark:text-white mb-1 truncate">{{ report.title || 'Untitled Report' }}</h3>
+              <p class="text-xs xs:text-sm text-gray-600 dark:text-gray-400 mb-2 line-clamp-2">{{ report.description || 'No description' }}</p>
+              <div class="flex items-center gap-2 xs:gap-4 text-xs text-gray-500 flex-wrap">
                 <span>{{ formatDate(report.timestamp) }}</span>
                 <span>{{ report.errorLogs?.length || 0 }} errors</span>
                 <span>{{ report.apiLogs?.length || 0 }} API calls</span>
               </div>
             </div>
             
-            <div class="flex gap-2">
+            <div class="flex gap-1 xs:gap-2 w-full xs:w-auto shrink-0">
               <button 
                 @click.stop="exportReportJson(report)"
-                class="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900 rounded"
+                class="flex-1 xs:flex-none px-2 py-1.5 xs:p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900 rounded text-xs"
                 title="Export as JSON"
               >
                 JSON
@@ -42,7 +42,7 @@
               
               <button 
                 @click.stop="exportReportMarkdown(report)"
-                class="p-2 text-green-500 hover:bg-green-50 dark:hover:bg-green-900 rounded"
+                class="flex-1 xs:flex-none px-2 py-1.5 xs:p-2 text-green-500 hover:bg-green-50 dark:hover:bg-green-900 rounded text-xs"
                 title="Export as Markdown"
               >
                 MD
@@ -50,7 +50,7 @@
               
               <button 
                 @click.stop="deleteReport(report.id)"
-                class="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900 rounded"
+                class="flex-1 xs:flex-none px-2 py-1.5 xs:p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900 rounded text-xs"
                 title="Delete"
               >
                 ×
@@ -59,20 +59,20 @@
           </div>
         </div>
         
-        <div v-if="reports.length === 0" class="text-center text-gray-500 py-8">
+        <div v-if="reports.length === 0" class="text-center text-gray-500 py-8 text-sm">
           No bug reports yet
         </div>
       </div>
     </div>
     
     <!-- Report Viewer -->
-    <div v-if="currentReport" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ currentReport.title }}</h3>
+    <div v-if="currentReport" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-2 xs:p-4">
+      <div class="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 mb-2 xs:mb-4">
+        <h3 class="text-base xs:text-lg font-semibold text-gray-900 dark:text-white break-all">{{ currentReport.title }}</h3>
         
         <button 
           @click="currentReport = null"
-          class="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors text-sm"
+          class="w-full xs:w-auto px-3 xs:px-4 py-1.5 xs:py-2 bg-gray-300 dark:bg-gray-600 text-gray-900 dark:text-white rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors text-xs xs:text-sm"
         >
           Close
         </button>
